@@ -1,6 +1,6 @@
 // TAIL FUNCTION IMPLEMENTATION
 const tail = (arr) => {
-  if (arr.slice(1).length = 0) {
+  if (arr.slice(1).length === 0) {
     return [];
   } else {
     return arr.slice(1);
@@ -37,16 +37,16 @@ const assertEqual = function(actual, expected) {
 // TEST CODE
 const words = ["Yo Yo", "Lighthouse", "Labs"];
 tail(words); // no need to capture the return value since we are not checking it
-assertEqual(tail(words), ["Lighthouse", "Labs"]); 
+assertEqual(tail(words), ["Lighthouse", "Labs"]);
 
 const words1 = [];
 tail(words1); // no need to capture the return value since we are not checking it
-assertEqual(tail(words1), []); 
+assertEqual(tail(words1), []);
 
 const words2 = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words); // no need to capture the return value since we are not checking it
-assertEqual(tail(words), ["Heavyhouse", "Labs"]); 
+tail(words2); // no need to capture the return value since we are not checking it
+assertEqual(tail(words), ["Heavyhouse", "Labs"]);
 
 const words3 = [];
-tail(words1); // no need to capture the return value since we are not checking it
-assertEqual(tail(words1), [``]); 
+tail(words3); // no need to capture the return value since we are not checking it
+assertEqual(tail(words3), [``]);

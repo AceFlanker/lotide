@@ -2,7 +2,7 @@
 
 const head = (arr) => {
   return arr[0];
-}
+};
 
 
 // TEST FUNCTION IMPLEMENTATION
