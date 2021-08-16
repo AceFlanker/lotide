@@ -1,3 +1,8 @@
+// TAIL FUNCTION IMPLEMENTATION
+const tail = (arr) => {
+  return arr.slice(1);
+};
+                                                                                                                                 
 // TEST FUNCTION IMPLEMENTATION
 const assertEqual = function(actual, expected) {
   if (Array.isArray(actual) === true) {
@@ -24,7 +29,6 @@ const assertEqual = function(actual, expected) {
 };
 
 // TEST CODE
-assertEqual("Lighthouse Labs", "Bootcamp");
-assertEqual("Common Sense", "Common Sense");
-assertEqual(1, 1);
-assertEqual(32, -32);
+const words = ["Yo Yo", "Lighthouse", "Labs"];
+tail(words); // no need to capture the return value since we are not checking it
+assertEqual(tail(words), ["Lighthouse", "Labs"]); 
