@@ -21,18 +21,18 @@ const assertArraysEqual = function(actual, expected) {
 
 const without = function(source, toBeRemoved) {
   let newArr = source.slice();
-  for (let i = 0 ; i < newArr.length; i++) {
+  for (let i = 0; i < newArr.length; i++) {
     toBeRemoved.forEach(element => {
       if (newArr[i] === element) {
         newArr.splice(i, 1);
         i--;
       }
-    })
+    });
   }
   return newArr;
-}
+};
 
-console.log(without(['1', 2, 3], ['1', 2]))
+console.log(without(['1', 2, 3], ['1', 2]));
 
 const words = ["hello", "world", "lighthouse"];
 without(words, ["lighthouse"]); // no need to capture return value for this test case

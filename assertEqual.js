@@ -2,7 +2,7 @@
 const assertEqual = function(actual, expected) {
   if (Array.isArray(actual) === true) {
     if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected} - unequal lengths`);
+      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
     } else if (actual.length === 0) {
       console.log(`💯 Assertion Passed: [] === []`);
     } else {
