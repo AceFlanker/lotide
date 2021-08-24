@@ -31,5 +31,4 @@ const words3 = [];
 tail(words3); // no need to capture the return value since we are not checking it
 assertEqual(tail(words3), [``]);
 
-// esArrays Test Code
-assertEqual(eqArrays([1, 2, 3], [1, 3, 2]), true);
+// eqArrays Test Codes
