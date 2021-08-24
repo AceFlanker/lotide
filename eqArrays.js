@@ -1,29 +1,4 @@
-// assertEqual was already modified on Day 1 practice to compare arrays
-const assertEqual = function(actual, expected) {
-  if (Array.isArray(actual) === true) {
-    if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
-    } else if (actual.length === 0) {
-      console.log(`💯 Assertion Passed: [] === []`);
-    } else {
-      for (let i = 0; i < actual.length; i++) {
-        if (actual[i] !== expected[i]) {
-          console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-          break;
-        }
-        if (actual[actual.length - 1] === expected[actual.length - 1]) {
-          console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-        }
-      }
-    }
-  } else {
-    if (actual === expected) {
-      console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-    } else {
-      console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-    }
-  }
-};
+const assertEqual = require('./assertEqual');
 
 const eqArrays = function(arr1, arr2) {
   if (arr1.length !== arr2.length) {
@@ -42,4 +17,9 @@ const eqArrays = function(arr1, arr2) {
   }
 };
 
-assertEqual(eqArrays([1, 2, 3], [1, 3, 2]), true);
+module.exports = eqArrays;
+
+assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true);
+assertEqual(eqArrays([1, 2, 3], [1, 3, 2]), false);
+assertEqual(eqArrays(['1', '2', '3'], ['1', '2', '3']), true);
+assertEqual(eqArrays(['1', '2', '3'], ['1', '2', 3]), false);
