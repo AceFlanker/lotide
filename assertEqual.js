@@ -1,25 +1,31 @@
 const assertEqual = function(actual, expected) {
+  const logPass = function (input1, input2) {
+    console.log(`💯 Assertion Passed: ${input1} === ${input2}`);
+  }
+  const logFail = function (input1, input2) {
+    console.log(`👎 Assertion Failed: ${input1} !== ${input2}`);
+  } 
   if (Array.isArray(actual) === true) {
     if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
+      logFail(actual, expected);
     } else if (actual.length === 0) {
-      console.log(`💯 Assertion Passed: [] === []`);
+      logPass(actual, expected);
     } else {
       for (let i = 0; i < actual.length; i++) {
         if (actual[i] !== expected[i]) {
-          console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
+          logFail(actual, expected);
           break;
         }
-        if (actual[actual.length - 1] === expected[actual.length - 1]) {
-          console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
+        if (i === actual.length - 1) {
+          logPass(actual, expected);
         }
       }
     }
   } else {
     if (actual === expected) {
-      console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
+      logPass(actual, expected);
     } else {
-      console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
+      logFail(actual, expected);
     }
   }
 };

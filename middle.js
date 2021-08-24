@@ -1,5 +1,3 @@
-const assertArraysEqual = require('./assertArraysEqual');
-
 const middle = function(inputArr) {
   const findMid = function(arr) {
     const halfLength = Math.floor(arr.length / 2);
