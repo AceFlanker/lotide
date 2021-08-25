@@ -25,29 +25,29 @@ const map = require('./map');
 const takeUntil = require('./takeUntil');
 
 module.exports = {
-  // assertEqual: assertEqual,
-  // assertArraysEqual: assertArraysEqual,
+  // assertEqual,
+  // assertArraysEqual,
   // assertObjectsEqual: assertObjectsEqual,
 
-  eqArrays: eqArrays,
-  eqObjects: eqObjects,
+  eqArrays,
+  eqObjects,
   
-  flatten: flatten,
-
-  without: without,
-
-  head: head,
-  tail: tail,
-  middle: middle,
-
-  countOnly: countOnly,
-  countLetters: countLetters,
-  letterPositions: letterPositions,
-
-  findKeyByValue: findKeyByValue,
-  findKey: findKey,
-
-  map: map,
-
-  takeUntil: takeUntil,
+  flatten,
+  
+  without,
+  
+  head,
+  tail,
+  middle,
+  
+  countOnly,
+  countLetters,
+  letterPositions,
+  
+  findKeyByValue,
+  findKey,
+  
+  map,
+  
+  takeUntil,
 };
