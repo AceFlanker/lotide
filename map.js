@@ -1,24 +1,7 @@
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  } else if (arr1.length === 0) {
-    return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-      if (arr1[arr1.length - 1] === arr2[arr2.length - 1]) {
-        return true;
-      }
-    }
-  }
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
-const assertArraysEqual = function(actual, expected) {
-  eqArrays(actual, expected) ? console.log(`💯 Assertion Passed: ${actual} === ${expected}`) : console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-};
-
+// Function Definition
 const map = function(array, callback) {
   const results = [];
   for (let item of array) {
@@ -27,22 +10,38 @@ const map = function(array, callback) {
   return results;
 };
 
-// Compass Scenario
-const words = ["ground", "control", "to", "major", "tom"];
-const results1 = map(words, word => word[0]);
-assertArraysEqual(results1, ['g', 'c', 't', 'm', 't']);
+module.exports = map;
 
-// Scenario 1
-const divideBy4 = [30, 240, 365, 0.4];
-const results2 = map(divideBy4, num => num / 4);
-assertArraysEqual(results2, [7.5, 60, 91.25, 0.1]);
+// Test Codes
+// Compass Scenario + Student Scenarios 1 and 2
+describe('#map', () => {
+  it('returns true for inital letters of ["ground", "control", "to", "major", "tom"] and ["g", "c", "t", "m", "t"]', () => {
+    const words = ["ground", "control", "to", "major", "tom"];
+    const results1 = map(words, word => word[0]);
+    assert.deepEqual(results1, ['g', 'c', 't', 'm', 't']);
+  });
+  it('returns true for the quotients of [30, 240, 365, 0.4] divided by 4 and [7.5, 60, 91.25, 0.1]', () => {
+    const divideBy4 = [30, 240, 365, 0.4];
+    const results2 = map(divideBy4, num => num / 4);
+    assert.deepEqual(results2, [7.5, 60, 91.25, 0.1]);
+  });
+  it('returns true for full capitalizations of ["this", "is", "sparta!"]', () => {
+    const stopYellingPlease = ['this', 'is', 'sparta!'];
+    const results3 = map(stopYellingPlease, char => char.toUpperCase());
+    assert.deepEqual(results3, ['THIS', 'IS', 'SPARTA!']);
+  });
+});
 
-// Scenario 2
-const stopYellingPlease = ['this', 'is', 'sparta!'];
-const results3 = map(stopYellingPlease, char => char.toUpperCase());
-assertArraysEqual(results3, ['THIS', 'IS', 'SPARTA!']);
 
-// Scenario 3
+// Student Over-ambitious Scenario 3
+
+// Too complicated to factor with MoChai.
+
+// However, given enough time, one could use a loop to iterate
+// the complete list of possible encoded cases to compare each
+// case against the original unencrypted message.
+
+// Cipher outputs a scrambled message with a randomized degree of shifts (to the right or from A to Z)
 const caesarCipher = secretMessage => {
   const alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   let scrambledEggs = '';
@@ -61,6 +60,7 @@ const caesarCipher = secretMessage => {
   return scrambledEggs.split('');
 };
 
+// Dicipher outputs a single character according to a given degree of shift
 const charDicipher = (singleChar, shiftDegree) => {
   const alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   for (let i = 0; i < 26; i++) {
@@ -73,6 +73,7 @@ const charDicipher = (singleChar, shiftDegree) => {
   }
 };
 
+// Dicipher outputs a complete list of all possible shifting cases for the encoded message
 const caesarDicipher = scrambledCode => {
   let list = {};
   for (let i = 0; i < 26; i++) {

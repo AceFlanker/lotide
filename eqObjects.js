@@ -1,48 +1,7 @@
-const assertEqual = function(actual, expected) {
-  if (Array.isArray(actual) === true) {
-    if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
-    } else if (actual.length === 0) {
-      console.log(`💯 Assertion Passed: [] === []`);
-    } else {
-      for (let i = 0; i < actual.length; i++) {
-        if (actual[i] !== expected[i]) {
-          console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-          break;
-        }
-        if (actual[actual.length - 1] === expected[actual.length - 1]) {
-          console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-        }
-      }
-    }
-  } else {
-    if (actual === expected) {
-      console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-    } else {
-      console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-    }
-  }
-};
+// Dependency Functions Imports
+const eqArrays = require('./eqArrays');
+const assert = require('chai').assert;
 
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  } else if (arr1.length === 0) {
-    return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-      if (arr1[arr1.length - 1] === arr2[arr2.length - 1]) {
-        return true;
-      }
-    }
-  }
-};
-
-// Returns true if both objects have identical keys with identical values.
-// Otherwise you get back a big fat false!
 const eqObjects = function(object1, object2) {
   if (Object.keys(object1).length !== Object.keys(object2).length) {
     return false;
@@ -59,17 +18,26 @@ const eqObjects = function(object1, object2) {
   return true;
 };
 
-const ab = { a: "1", b: "2" };
-const ba = { b: "2", a: "1" };
-assertEqual(eqObjects(ab, ba), true); // => true
+module.exports = eqObjects;
 
-const abc = { a: "1", b: "2", c: "3" };
-assertEqual(eqObjects(ab, abc), false); // => false
-
-
-const cd = { c: "1", d: ["2", 3] };
-const dc = { d: ["2", 3], c: "1" };
-assertEqual(eqObjects(cd, dc), true); // => true
-
-const cd2 = { c: "1", d: ["2", 3, 4] };
-assertEqual(eqObjects(cd, cd2), false); // => false
+// Test Codes
+describe('#eqObjects', () => {
+  const ab = { a: "1", b: "2" };
+  const ba = { b: "2", a: "1" };
+  const abc = { a: "1", b: "2", c: "3" };
+  const cd = { c: "1", d: ["2", 3] };
+  const dc = { d: ["2", 3], c: "1" };
+  const cd2 = { c: "1", d: ["2", 3, 4] };
+  it('returns true for { a: "1", b: "2" } and { b: "2", a: "1" }', () => {
+    assert.strictEqual(eqObjects(ab, ba), true);
+  });
+  it('returns false for { a: "1", b: "2" } and { a: "1", b: "2", c: "3" }', () => {
+    assert.strictEqual(eqObjects(ab, abc), false);
+  });
+  it('returns true for { c: "1", d: ["2", 3] } and { d: ["2", 3], c: "1" }', () => {
+    assert.strictEqual(eqObjects(cd, dc), true);
+  });
+  it('returns false for { c: "1", d: ["2", 3] },  c: "1", d: ["2", 3, 4] }', () => {
+    assert.strictEqual(eqObjects(cd, cd2), false);
+  });
+});

@@ -1,23 +1,5 @@
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  } else if (arr1.length === 0) {
-    return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-      if (arr1[arr1.length - 1] === arr2[arr2.length - 1]) {
-        return true;
-      }
-    }
-  }
-};
-
-const assertArraysEqual = function(actual, expected) {
-  eqArrays(actual, expected) ? console.log(`💯 Assertion Passed: ${actual} === ${expected}`) : console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
 const without = function(source, toBeRemoved) {
   let newArr = source.slice();
@@ -32,9 +14,15 @@ const without = function(source, toBeRemoved) {
   return newArr;
 };
 
-console.log(without(['1', 2, 3], ['1', 2]));
+module.exports = without;
 
-const words = ["hello", "world", "lighthouse"];
-without(words, ["lighthouse"]); // no need to capture return value for this test case
-// Make sure the original array was not altered by the without function
-assertArraysEqual(words, ["hello", "world", "lighthouse"]);
+// Test Codes
+describe('#eqArrays', () => {
+  it('returns true for ["1", 2, 3] and ["1", 2])', () => {
+    assert.deepEqual(without(['1', 2, 3], [3]), ['1', 2]);
+  });
+  it('returns true for ["hello", "world", "lighthouse"] without ["lighthouse"] and ["hello", "world"]', () => {
+    const words = ["hello", "world", "lighthouse"];
+    assert.deepEqual(without(words, ['lighthouse']), ["hello", "world"]);
+  });
+});

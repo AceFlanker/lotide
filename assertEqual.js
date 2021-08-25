@@ -1,10 +1,11 @@
+// Function Definition
 const assertEqual = function(actual, expected) {
-  const logPass = function (input1, input2) {
+  const logPass = function(input1, input2) {
     console.log(`💯 Assertion Passed: ${input1} === ${input2}`);
-  }
-  const logFail = function (input1, input2) {
+  };
+  const logFail = function(input1, input2) {
     console.log(`👎 Assertion Failed: ${input1} !== ${input2}`);
-  } 
+  };
   if (Array.isArray(actual) === true) {
     if (actual.length !== expected.length) {
       logFail(actual, expected);
@@ -31,3 +32,9 @@ const assertEqual = function(actual, expected) {
 };
 
 module.exports = assertEqual;
+
+// Test Codes
+assertEqual("Lighthouse Labs", "Bootcamp");
+assertEqual("Common Sense", "Common Sense");
+assertEqual(1, 1);
+assertEqual(32, -32);

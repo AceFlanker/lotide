@@ -1,32 +1,14 @@
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  } else if (arr1.length === 0) {
-    return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-      if (arr1[arr1.length - 1] === arr2[arr2.length - 1]) {
-        return true;
-      }
-    }
-  }
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
-const assertArraysEqual = function(actual, expected) {
-  eqArrays(actual, expected) ? console.log(`💯 Assertion Passed: ${actual} === ${expected}`) : console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-};
-
-const arrayInsert = function(oldArr, modArr) {
-  oldArr.forEach((arrEle) => {
-    modArr.push(arrEle);
-  });
-};
-
+// Function Definition
 const flatten = function(inputArr) {
   let newArr = [];
+  const arrayInsert = function(oldArr, modArr) {
+    oldArr.forEach((arrEle) => {
+      modArr.push(arrEle);
+    });
+  };
   for (const ele of inputArr) {
     if (Array.isArray(ele)) {
       arrayInsert(ele, newArr);
@@ -50,5 +32,14 @@ const flatten = function(inputArr) {
 //   return newArr;
 // }
 
-assertArraysEqual(flatten([1, 2, [3, 4], 5, [6]]), [1, 2, 3, 4, 5, 6]);
-assertArraysEqual(flatten([[1, 2], ['3', 4], 5, '6', [7, '8'], 9]), [1, 2, '3', 4, 5, '6', 7, '8', 9]);
+module.exports = flatten;
+
+// Test Codes
+describe('#flatten', () => {
+  it('returns true for [1, 2, [3, 4], 5, [6]]) and [1, 2, 3, 4, 5, 6]', () => {
+    assert.deepEqual(flatten([1, 2, [3, 4], 5, [6]]), [1, 2, 3, 4, 5, 6]);
+  });
+  it('returns true for [1, 2, 3] and [1, 3, 3]', () => {
+    assert.deepEqual(flatten([[1, 2], ['3', 4], 5, '6', [7, '8'], 9]), [1, 2, '3', 4, 5, '6', 7, '8', 9]);
+  });
+});

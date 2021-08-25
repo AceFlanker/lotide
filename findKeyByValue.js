@@ -1,29 +1,7 @@
-const assertEqual = function(actual, expected) {
-  if (Array.isArray(actual) === true) {
-    if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
-    } else if (actual.length === 0) {
-      console.log(`💯 Assertion Passed: [] === []`);
-    } else {
-      for (let i = 0; i < actual.length; i++) {
-        if (actual[i] !== expected[i]) {
-          console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-          break;
-        }
-        if (actual[actual.length - 1] === expected[actual.length - 1]) {
-          console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-        }
-      }
-    }
-  } else {
-    if (actual === expected) {
-      console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-    } else {
-      console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-    }
-  }
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
+// Function Definition
 const findKeyByValue = function(inputObj, propValue) {
   let keyName = undefined;
   for (const key in inputObj) {
@@ -34,11 +12,19 @@ const findKeyByValue = function(inputObj, propValue) {
   return keyName;
 };
 
-const bestTVShowsByGenre = {
-  sciFi: "The Expanse",
-  comedy: "Brooklyn Nine-Nine",
-  drama:  "The Wire"
-};
+module.exports = findKeyByValue;
 
-assertEqual(findKeyByValue(bestTVShowsByGenre, "The Wire"), "drama");
-assertEqual(findKeyByValue(bestTVShowsByGenre, "That '70s Show"), undefined);
+// Test Codes
+describe('#findKeyByValue', () => {
+  const bestTVShowsByGenre = {
+    sciFi: "The Expanse",
+    comedy: "Brooklyn Nine-Nine",
+    drama:  "The Wire"
+  };
+  it('returns true for the genre of "The Wire" and "drama"', () => {
+    assert.strictEqual(findKeyByValue(bestTVShowsByGenre, "The Wire"), "drama");
+  });
+  it('returns true for index the genre of "That \'70s Show" and undefined', () => {
+    assert.strictEqual(findKeyByValue(bestTVShowsByGenre, "That '70s Show"), undefined);
+  });
+});

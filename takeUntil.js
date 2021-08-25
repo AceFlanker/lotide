@@ -1,24 +1,7 @@
-const eqArrays = function(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  } else if (arr1.length === 0) {
-    return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
-      }
-      if (arr1[arr1.length - 1] === arr2[arr2.length - 1]) {
-        return true;
-      }
-    }
-  }
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
-const assertArraysEqual = function(actual, expected) {
-  eqArrays(actual, expected) ? console.log(`💯 Assertion Passed: ${actual} === ${expected}`) : console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-};
-
+// Function Definition
 const takeUntil = (inputArr, callMeBach) => {
   let newArr = [];
   for (let i = 0; i <  inputArr.length; i++) {
@@ -30,16 +13,20 @@ const takeUntil = (inputArr, callMeBach) => {
   return newArr;
 };
 
-const data1 = [1, 2, 5, 7, 2, -1, 2, 4, 5];
-const results1 = takeUntil(data1, x => x < 0);
-console.log(results1);
+module.exports = takeUntil;
 
-console.log('---');
+// Test Codes
+describe('#takeUntil', () => {
+  it('returns true for [1, 2, 5, 7, 2, -1, 2, 4, 5] until a negative number and [ 1, 2, 5, 7, 2 ])', () => {
+    const data1 = [1, 2, 5, 7, 2, -1, 2, 4, 5];
+    const results1 = takeUntil(data1, x => x < 0);
+    assert.deepEqual(results1, [ 1, 2, 5, 7, 2 ]);
+  });
+  it('returns true for ["I\'ve", "been", "to", "Hollywood", ",", "I\'ve", "been", "to", "Redwood"] until a "," (comma) and [ "I\'ve", "been", "to", "Hollywood" ]', () => {
+    const data2 = ["I've", "been", "to", "Hollywood", ",", "I've", "been", "to", "Redwood"];
+    const results2 = takeUntil(data2, x => x === ',');
+    assert.deepEqual(results2, [ 'I\'ve', 'been', 'to', 'Hollywood' ]);
+  });
+});
 
-const data2 = ["I've", "been", "to", "Hollywood", ",", "I've", "been", "to", "Redwood"];
-const results2 = takeUntil(data2, x => x === ',');
-console.log(results2);
-
-assertArraysEqual(takeUntil(data1, x => x < 0),[ 1, 2, 5, 7, 2 ]);
-assertArraysEqual(takeUntil(data2, x => x === ','),[ 'I\'ve', 'been', 'to', 'Hollywood' ]);
 

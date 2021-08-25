@@ -1,5 +1,5 @@
 // eqArrays and Dependency Functions Imports
-const eqArrays = require('../eqArrays')
+const eqArrays = require('../eqArrays');
 const assert = require('chai').assert;
 
 describe('#eqArrays', () => {

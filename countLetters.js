@@ -1,29 +1,7 @@
-// const assertEqual = function(actual, expected) {
-//   if (Array.isArray(actual) === true) {
-//     if (actual.length !== expected.length) {
-//       console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
-//     } else if (actual.length === 0) {
-//       console.log(`💯 Assertion Passed: [] === []`);
-//     } else {
-//       for (let i = 0; i < actual.length; i++) {
-//         if (actual[i] !== expected[i]) {
-//           console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-//           break;
-//         }
-//         if (actual[actual.length - 1] === expected[actual.length - 1]) {
-//           console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-//         }
-//       }
-//     }
-//   } else {
-//     if (actual === expected) {
-//       console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-//     } else {
-//       console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-//     }
-//   }
-// };
+// Dependency Function Import
+const assert = require('chai').assert;
 
+// Function Definition
 const countLetters = function(inputStr) {
   let letterCount = {};
   for (const letter of inputStr) {
@@ -38,4 +16,11 @@ const countLetters = function(inputStr) {
   return letterCount;
 };
 
-console.log(countLetters('lighthouse in the house'));
+module.exports = countLetters;
+
+// Test Code
+describe('#countLetters', () => {
+  it('returns true for letter counts of ("lighthouse in the house") and { l: 1, i: 2, g: 1, h: 4, t: 2, o: 2, u: 2, s: 2, e: 3, n: 1 }', () => {
+    assert.deepEqual(countLetters('lighthouse in the house'), { l: 1, i: 2, g: 1, h: 4, t: 2, o: 2, u: 2, s: 2, e: 3, n: 1 });
+  });
+});

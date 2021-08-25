@@ -1,31 +1,8 @@
-const assertEqual = function(actual, expected) {
-  if (Array.isArray(actual) === true) {
-    if (actual.length !== expected.length) {
-      console.log(`👎 Assertion Failed: ${actual} != ${expected}`);
-    } else if (actual.length === 0) {
-      console.log(`💯 Assertion Passed: [] === []`);
-    } else {
-      for (let i = 0; i < actual.length; i++) {
-        if (actual[i] !== expected[i]) {
-          console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-          break;
-        }
-        if (actual[actual.length - 1] === expected[actual.length - 1]) {
-          console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-        }
-      }
-    }
-  } else {
-    if (actual === expected) {
-      console.log(`💯 Assertion Passed: ${actual} === ${expected}`);
-    } else {
-      console.log(`👎 Assertion Failed: ${actual} !== ${expected}`);
-    }
-  }
-};
+// Dependency Function Import
+const assert = require('chai').assert;
 
-// allItems: an array of strings that we need to look through
-// itemsToCount: an object specifying what to count
+
+// Function Definition
 const countOnly = function(allItems, itemsToCount) {
   const results = {};
   for (const item of allItems) {
@@ -40,21 +17,32 @@ const countOnly = function(allItems, itemsToCount) {
   return results;
 };
 
-const firstNames = [
-  "Karl",
-  "Salima",
-  "Agouhanna",
-  "Fang",
-  "Kavith",
-  "Jason",
-  "Salima",
-  "Fang",
-  "Joe"
-];
+module.exports = countOnly;
 
-const result1 = countOnly(firstNames, { "Jason": true, "Karima": true, "Fang": true, "Agouhanna": false });
-
-assertEqual(result1["Jason"], 1);
-assertEqual(result1["Karima"], undefined);
-assertEqual(result1["Fang"], 2);
-assertEqual(result1["Agouhanna"], undefined);
+// Test Codes
+describe('#countOnly', () => {
+  const firstNames = [
+    "Karl",
+    "Salima",
+    "Agouhanna",
+    "Fang",
+    "Kavith",
+    "Jason",
+    "Salima",
+    "Fang",
+    "Joe"
+  ];
+  const result = countOnly(firstNames, { "Jason": true, "Karima": true, "Fang": true, "Agouhanna": false });
+  it('returns true for "Jason" and 1', () => {
+    assert.strictEqual(result["Jason"], 1);
+  });
+  it('returns true for "Karima" and undefined"', () => {
+    assert.strictEqual(result["Karima"], undefined);
+  });
+  it('returns false for "Fang" and 2', () => {
+    assert.strictEqual(result["Fang"], 2);
+  });
+  it('returns false for "Agouhanna" and undefined', () => {
+    assert.strictEqual(result["Agouhanna"], undefined);
+  });
+});
