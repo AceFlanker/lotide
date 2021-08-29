@@ -1,22 +1,29 @@
-// Dependency Function Import
+// Dependency Functions Imports
 const assert = require('chai').assert;
+const eqObjects = require('./eqObjects');
 
 // Function Definition
 const eqArrays = function(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
-  } else if (arr1.length === 0) {
+  }
+  if (arr1.length === 0) {
     return true;
-  } else {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
+  }
+  for (let i = 0; i < arr1.length; i++) {
+    if (Array.isArray(arr1[i])) {
+      if (!Array.isArray(arr2[i]) || Array.isArray(arr2[i]) && !eqArrays(arr1[i], arr2[i])) {
         return false;
       }
-      if (i === arr1.length - 1) {
-        return true;
+    } else if (typeof arr1[i] === 'object') {
+      if (typeof arr2[i] !== 'object' || typeof arr2[i] === 'object' && eqObjects(arr1[i], arr2[i])) {
+        return false;
       }
+    } else if (arr1[i] !== arr2[i]) {
+      return false;
     }
   }
+  return true;
 };
 
 module.exports = eqArrays;
@@ -34,5 +41,8 @@ describe('#eqArrays', () => {
   });
   it('returns false for ["1", "2", "3"], ["1", "2", 3]', () => {
     assert.strictEqual(eqArrays(['1', '2', '3'], ['1', '2', 3]), false);
+  });
+  it('returns false for ["1", ["2"], "3"], ["1", ["2"], "3"]', () => {
+    assert.strictEqual(eqArrays(['1', ['2'], '3'], ['1', ['2'], '3']), true);
   });
 });

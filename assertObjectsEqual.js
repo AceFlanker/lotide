@@ -3,13 +3,13 @@ const eqObjects = require('./eqObjects');
 
 // Function Definition
 const assertObjectsEqual = function(actual, expected) {
+  const inspect = require('util').inspect;
   const logPass = function(actual, expected) {
     console.log(`💯 Assertion Passed: ${inspect(actual)} === ${inspect(expected)}`);
   };
   const logFail = function(actual, expected) {
     console.log(`👎 Assertion Failed: ${inspect(actual)} !== ${inspect(expected)}`);
   };
-  const inspect = require('util').inspect;
   eqObjects(actual, expected) ? logPass(actual, expected) : logFail(actual, expected);
 };
 
